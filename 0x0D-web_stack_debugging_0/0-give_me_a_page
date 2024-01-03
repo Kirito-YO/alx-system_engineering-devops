@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-# This script fixes apache problem
-
+# this cmd fixe apache2 problem
 service apache2 start
