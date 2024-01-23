@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
-#a script to run nginx as nginx
-pkill -f apache2
-chown -R nginx:nginx /etc/nginx
-chmod 755 -R /etc/nginx
-sed -i 's+pid /run/nginx.pid;+pid /tmp/nginx.pid;+' /etc/nginx/nginx.conf
-sed -i 's/listen 80 default_server;/listen 8080 default_server;/' /etc/nginx/sites-available/default
-sed -i 's/listen \[::\]:80 default_server ipv6only=on;/listen \[::\]:8080 default_server ipv6only=on;/' /etc/nginx/sites-available/default
-sudo -u nginx service nginx start
+#  Run Nginx as Nginx 7 lines or less 
+sed -i 's/Listen 8080/#Listen 8080/g' /etc/apache2/ports.conf
+sed -i 's/#user www-data;/user nginx;/g' /etc/nginx/nginx.conf
+sed -i 's/80/8080/g' /etc/nginx/sites-available/default
+pkill -1 apache2
+chmod ugo+wrx /etc/apache2/ports.conf /etc/nginx/nginx.conf | sudo -u nginx service nginx restart
