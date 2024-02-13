@@ -1,9 +1,9 @@
-**Postmortem Report**
+    **Postmortem Report**
 
-**Issue Summary:**
+**- Issue Summary:**
 Between 6:47 AM and 7:35 AM, an internet outage occurred at Site X, attributable to a power supply malfunction in the core switch.
 
-**Timeline:**
+**- Timeline:**
 - *6:47 AM:* Outage initiated
 - *6:47 AM:* Pagers activated to alert teams
 - *7:05 AM:* IT team identified the main issue and initiated troubleshooting
@@ -11,7 +11,7 @@ Between 6:47 AM and 7:35 AM, an internet outage occurred at Site X, attributable
 - *7:20 AM:* Switch rebooted
 - *7:35 AM:* Full restoration, 100% of traffic back online
 
-**Root Cause and Resolution:**
+*** Root Cause and Resolution:***
 At 6:47 AM, the primary power supply of the core switch failed, and the backup power supply was not connected. Consequently, the backup did not assume the role following the primary failure. At 7:20 AM, the IT team successfully plugged in the second power supply, initiating the switch's reboot. By 7:35 AM, all services were restored.
 
 **Corrective and Preventative Measures:**
