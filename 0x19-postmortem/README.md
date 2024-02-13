@@ -1,5 +1,11 @@
                                            Postmortem Report
 
+![It Hero](https://github.com/Kirito-YO/alx-system_engineering-devops/assets/106101462/031724d1-fd44-435c-b9f8-f0161f719516)
+Why did the IT hero bring a ladder to the park?
+Because he heard the network was experiencing an outage, and he wanted to "raise" the bar on connectivity! 🦸‍♂️🌐
+
+
+
 **Issue Summary:**
 
 Between 6:47 AM and 7:35 AM, an internet outage occurred at Site X, attributable to a power supply malfunction in the core switch.
