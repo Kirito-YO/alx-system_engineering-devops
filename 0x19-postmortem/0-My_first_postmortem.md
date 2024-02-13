@@ -1,4 +1,4 @@
-**Postmortem Report: Internet Outage at Site X**
+**Postmortem Report**
 
 **Issue Summary:**
 Between 6:47 AM and 7:35 AM, an internet outage occurred at Site X, attributable to a power supply malfunction in the core switch.
