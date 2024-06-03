@@ -1,23 +1,38 @@
 #!/usr/bin/python3
-"""Exports to-do list information for a given employee ID to CSV format."""
-import csv
+"""A python script that returns information about an
+employees TODO list progress.
+"""
+import json
 import requests
 import sys
-import urllib3
 
-# Disable SSL certificate verification
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+def get_todo_info():
+    """A function that gets the todo information for a particular user id"""
+    user_id = sys.argv[1]
+    # GET /user/<id> resource for user info
+    r = requests.get('https://jsonplaceholder.typicode.com/users?id={}'
+                     .format(user_id))
+    user = json.loads(r.text)
+    user_name = user[0].get('username')
+
+    # GET /user/<id>/todos for todo info
+    r = requests.get('https://jsonplaceholder.typicode.com/todos?userId={}'
+                     .format(user_id))
+    todos = json.loads(r.text)
+    dict_ = {}
+    task_list = []
+    dict_[user_id] = task_list
+    for task in todos:
+        task_d = {}
+        task_d['task'] = task.get('title')
+        task_d['completed'] = task.get('completed')
+        task_d['username'] = user_name
+        task_list.append(task_d)
+
+    with open("{}.json".format(user_id), 'w', encoding='utf-8') as fp:
+        json.dump(dict_, fp)
+
 
 if __name__ == "__main__":
-    user_id = sys.argv[1]
-    url = "https://jsonplaceholder.typicode.com/"
-    user = requests.get(url + "users/{}".format(user_id), verify=False).json()
-    username = user.get("username")
-    todos = requests.get(url + "todos", params={"userId": user_id}, verify=False).json()
-
-    with open("{}.csv".format(user_id), "w", newline="") as csvfile:
-        writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-        [
-            writer.writerow([user_id, username, t.get("completed"), t.get("title")])
-            for t in todos
-        ]
+    get_todo_info()
